@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Состояние системы</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+      body{
+        background:#fff;
+        font-family:Tahoma, Arial;
+        width:1850px;
+        margin:0;
+        padding-left:10px;
+        background-color:#F3F3F3;
+      }
+
+      .graph{
+        width:450px;
+        height:265px;
+        position:relative;
+        background-position: -35px -31px;
+        background-repeat:no-repeat;
+      }
+      .row{
+        overflow:hidden;
+      }
+      .place{
+        width:450px;
+        margin-right:10px;
+        float:left;
+      }
+      .name{
+        font-size:1.2em;
+        font-weight:normal;
+        margin:1em 0 .3em;
+        padding-left:37px;
+      }
+        .name__type{
+          color:#999;
+        }
+      .legend{
+        margin-top:20px;
+      }
+        .legend__item{
+          margin-right:30px;
+          font-weight:bold;
+          text-shadow: 1px 1px 2px #000;
+        }
+        
+      .scroller{
+        position:absolute;
+        left:38px;
+        top:8px;
+        overflow:hidden;
+        width:402px;
+        height:260px;
+      }
+        .scroller__list{
+          white-space:nowrap;
+        }
+        .scroller__graph{
+          width:402px;
+          height:260px;
+          background-position:-73px -39px;
+          display:inline-block;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="row">
+      <div class="place">
+        <h1 class="name"><span class="name__type">XSL</span> Поиск вакансий, за сутки</h1>
+        <div class="graph" data="24" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=8&rra_id=5&view_type=tree&graph_start=')">
+          <div class="graph__line">&#160;</div>
+        </div>
+      </div>
+      <div class="place">
+        <h1 class="name"><span class="name__type">XSL</span> Вакансия, за сутки</h1>
+        <div class="graph" data="24" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=13&rra_id=5&view_type=tree&graph_start=')">
+          <div class="graph__line">&#160;</div>
+        </div>
+      </div>
+      <div class="place">
+        <h1 class="name"><span class="name__type">XSL</span> Работодатель, за сутки</h1>
+        <div class="graph" data="24" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=12&rra_id=5&view_type=tree&graph_start=')">
+          <div class="graph__line">&#160;</div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="place">
+        <h1 class="name"><span class="name__type">XSL</span> Поиск вакансий, за три часа</h1>
+        <div class="graph" data="3" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=8&rra_id=5&view_type=tree&graph_start=')">&#160;</div>
+      </div>
+      <div class="place">
+        <h1 class="name"><span class="name__type">XSL</span> Вакансия, за три часа</h1>
+        <div class="graph" data="3" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=13&rra_id=5&view_type=tree&graph_start=')">&#160;</div>
+      </div>
+      <div class="place">
+        <h1 class="name"><span class="name__type">XSL</span> Работодатель, за три часа</h1>
+        <div class="graph" data="3" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=12&rra_id=5&view_type=tree&graph_start=')">&#160;</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="place">
+        <h1 class="name"><span class="name__type">Frontik</span> Поиск вакансий, за три часа</h1>
+        <div class="graph" data="3" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=10&rra_id=5&view_type=tree&graph_start=')">
+          &#160;
+        </div>
+      </div>
+      <div class="place">
+        <h1 class="name"><span class="name__type">Frontik</span> Вакансия, за три часа</h1>
+        <div class="graph" data="3" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=14&rra_id=5&view_type=tree&graph_start=')">
+          &#160;
+        </div>
+      </div>
+      <div class="place">
+        <h1 class="name"><span class="name__type">Frontik</span> Работодатель, за три часа</h1>
+        <div class="graph" data="3" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=15&rra_id=5&view_type=tree&graph_start=')">
+          &#160;
+        </div>
+      </div>
+    </div>
+    <div class="legend">
+      <span class="legend__item" style="color:#F9DDB3">100-я квантиль</span>
+      <span class="legend__item" style="color:#F2BE6B">95-я квантиль</span>
+      <span class="legend__item" style="color:#EC9D20">90-я квантиль</span>
+      <span class="legend__item" style="color:#EA8F00">80-я квантиль</span>
+    </div>
+    <form id="login" style="display:none;" action="http://cacti.hh.ru/graph.php" method="post" target="login">
+      <input type="hidden" name="action" value="login"/>
+      <input type="hidden" name="login_username" value="guest"/>
+      <input type="hidden" name="login_password" value="guest"/>
+    </form>
+    <iframe name="login" style="display:none;">&#160;</iframe>
+    <script>
+      (function(){
+        var graphs = document.querySelectorAll(".graph");
+        for (var i = 0; i < graphs.length; i++){
+          reload(graphs[i]);
+          doScroll(graphs[i]);
+        }
+
+        function reload(graph){
+          graph.img = graph.img || (function(){
+            var img = document.createElement('img');
+            img.onload = update(graph);
+            img.onerror = error(graph);
+            return img;
+          })();
+          var data = getGraphData(graph);
+          var url = data.url;
+          var hours = data.hours;
+          graph.img.src = url.replace(/&graph_start=\d*/, '&graph_start=' + Math.round((new Date().getTime() - 1000 * 60 * 60 * hours) / 1000));
+          
+        }
+        
+        function getGraphData(graph){
+          var bgUrl = graph.style.backgroundImage;
+          return {
+            start: bgUrl.match(/graph_start=(\d*)/)[1],
+            end: bgUrl.match(/graph_end=(\d*)/) ? bgUrl.match(/graph_end=(\d*)/)[1] : null,
+            url: bgUrl.match(/url\("(.*)"\)/) ? bgUrl.match(/url\("(.*)"\)/)[1] : bgUrl.match(/url\((.*)\)/)[1],
+            hours: graph.hours || (graph.hours = parseInt(graph.getAttribute('data'), 10))
+          };
+        }
+       
+        function update(graph){
+          return function(){
+            graph.style.backgroundImage = 'url("' + graph.img.src + '")';
+            window.setTimeout(function(){
+              reload(graph);
+            }, 30000);
+          };
+        }
+
+        
+        function error(graph){
+          return function(graph){
+            window.setTimeout(function(){
+              reload(graph);
+            }, 10000);
+          };
+        }
+        
+        var scroller = document.createElement('div');
+        scroller.className = 'scroller';
+        var scrollerList = scroller.appendChild(document.createElement('div'));
+        scrollerList.className = 'scroller__list';
+
+        
+        function doScroll(graph){
+          function wheel(event){
+            if (event.axis != event.HORIZONTAL_AXIS){
+              return;
+            }
+            if (!graph.querySelector('.scroller')){
+              placeScroller(graph);
+            }
+            event.preventDefault();
+            
+            scroller.scrollLeft += event.detail * 3;
+            
+            if (scroller.scrollLeft < 400){
+              var data = getGraphData(scrollerList.querySelector('div'));
+              data.end = parseInt(data.start, 10) - 1;
+              data.start = Math.round((new Date(data.end * 1000).getTime() - 1000 * 60 * 60 * data.hours) / 1000);
+              data.url = data.url.replace(/&graph_start=\d*/, '').replace(/&graph_end=\d*/, '') + '&graph_start=' + data.start + '&graph_end=' + data.end;
+              updateScroller(data);
+            }
+          }
+          graph.addEventListener('DOMMouseScroll', wheel, false);
+        }
+        
+        function placeScroller(graph){
+          if (scroller.timer){
+            window.clearTimeout(scroller.timer);
+          }
+          clearScroller();
+          graph.appendChild(scroller);
+          updateScroller(getGraphData(graph));
+          graph.scroll = true;
+          scroller.timer = window.setTimeout(function(){
+            clearScroller();
+          }, 1000 * 60 * 3); // 3 минуты
+        }
+        
+        function updateScroller(data){
+          var scroll = document.createElement('div');
+          var firstChild = scrollerList.querySelector('div');
+          scroll.className = 'scroller__graph';
+          scroll.style.backgroundImage = 'url("' + data.url  + '")';
+          scroll.hours = data.hours;
+          if (firstChild){
+            scrollerList.insertBefore(scroll, firstChild);
+            scroller.scrollLeft += scroll.offsetWidth;
+          }else{
+            scrollerList.appendChild(scroll);
+          }
+        }
+        
+        function clearScroller(){
+          scrollerList.innerHTML = '';
+          if (scroller.parentNode){
+            scroller.parentNode.removeChild(scroller);
+          }
+        }
+      })();
+      
+    </script>
+  </body>
+</html>
