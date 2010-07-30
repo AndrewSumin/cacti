@@ -17,7 +17,7 @@
         width:450px;
         height:265px;
         position:relative;
-        background-position: -35px -31px;
+        background-position: -16px -31px;
         background-repeat:no-repeat;
       }
       .row{
@@ -48,7 +48,7 @@
         
       .scroller{
         position:absolute;
-        left:38px;
+        left:41px;
         top:8px;
         overflow:hidden;
         width:402px;
@@ -58,9 +58,9 @@
           white-space:nowrap;
         }
         .scroller__graph{
-          width:402px;
+          width:399px;
           height:260px;
-          background-position:-73px -39px;
+          background-position:-57px -39px;
           display:inline-block;
         }
     </style>
@@ -68,28 +68,28 @@
   <body>
     <div class="row">
       <div class="place">
-        <h1 class="name"><span class="name__type">XSL</span> Поиск вакансий, за сутки</h1>
-        <div class="graph" data="24" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=8&rra_id=5&view_type=tree&graph_start=')">
+        <h1 class="name"><span class="name__type">Frontik</span> Поиск вакансий, за три часа</h1>
+        <div class="graph" data="3" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=16&rra_id=5&view_type=tree&graph_start=')">
           <div class="graph__line">&#160;</div>
         </div>
       </div>
       <div class="place">
-        <h1 class="name"><span class="name__type">XSL</span> Вакансия, за сутки</h1>
-        <div class="graph" data="24" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=13&rra_id=5&view_type=tree&graph_start=')">
+        <h1 class="name"><span class="name__type">Frontik</span> Поиск вакансий, за сутки</h1>
+        <div class="graph" data="24" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=16&rra_id=5&view_type=tree&graph_start=')">
           <div class="graph__line">&#160;</div>
         </div>
       </div>
-      <div class="place">
+      <!--div class="place">
         <h1 class="name"><span class="name__type">XSL</span> Работодатель, за сутки</h1>
         <div class="graph" data="24" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=12&rra_id=5&view_type=tree&graph_start=')">
           <div class="graph__line">&#160;</div>
         </div>
-      </div>
+      </div-->
     </div>
-    <div class="row">
+    <!--div class="row">
       <div class="place">
         <h1 class="name"><span class="name__type">XSL</span> Поиск вакансий, за три часа</h1>
-        <div class="graph" data="3" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=8&rra_id=5&view_type=tree&graph_start=')">&#160;</div>
+        <div class="graph" data="3" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=16&rra_id=5&view_type=tree&graph_start=')">&#160;</div>
       </div>
       <div class="place">
         <h1 class="name"><span class="name__type">XSL</span> Вакансия, за три часа</h1>
@@ -119,7 +119,7 @@
           &#160;
         </div>
       </div>
-    </div>
+    </div-->
     <div class="legend">
       <span class="legend__item" style="color:#F9DDB3">100-я квантиль</span>
       <span class="legend__item" style="color:#F2BE6B">95-я квантиль</span>
@@ -190,15 +190,15 @@
         
         function doScroll(graph){
           function wheel(event){
-            if (event.axis != event.HORIZONTAL_AXIS){
-              return;
-            }
+            //if (event.axis != event.HORIZONTAL_AXIS){
+              //return;
+            //}
             if (!graph.querySelector('.scroller')){
               placeScroller(graph);
             }
             event.preventDefault();
             
-            scroller.scrollLeft += event.detail * 3;
+            scroller.scrollLeft += (event.axis == event.HORIZONTAL_AXIS ? 1 : -1) * event.detail * 5;
             
             if (scroller.scrollLeft < 400){
               var data = getGraphData(scrollerList.querySelector('div'));
@@ -237,6 +237,8 @@
             scrollerList.appendChild(scroll);
           }
         }
+        
+        document.body.onclick = clearScroller;
         
         function clearScroller(){
           scrollerList.innerHTML = '';
