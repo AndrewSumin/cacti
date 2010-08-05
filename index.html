@@ -302,13 +302,12 @@
           var totalbefore = graph.hours * 5 * 60 * 60;
           var totalafter = hours * 5 * 60 * 60;
           
-          var shiftbefore = totalbefore * graph.defScroll / width;
-          var shiftafter = totalafter * graph.defScroll / width;
+          var shiftbefore = totalbefore * scroller.scrollLeft / width;
+          var shiftafter = totalafter * scroller.scrollLeft / width;
           
           var visiblestart = parseInt(getGraphData(scroller.scrollerList.querySelectorAll('.scroller__graph')[0]).start, 10) + shiftbefore;
           var start = visiblestart - shiftafter;
           
-          console.log(new Date(start * 1000))
           
           graph = scroller.scrollerList.querySelectorAll('.scroller__graph')[0];
           graph.hours = hours;
@@ -420,7 +419,7 @@
         function updateHours(graph, scale){
           reloadScroller(graph, scale);
           graph.hours = graph.hours / scale;
-          reload(graph);
+          //reload(graph);
         }
       })();
       
