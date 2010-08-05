@@ -164,22 +164,31 @@
             img.onerror = error(graph);
             return img;
           })();
-          var data = getGraphData(graph);
-          var url = data.url;
-          var hours = data.hours;
-          graph.img.src = url.replace(/&graph_start=\d*/, '&graph_start=' + Math.round((new Date().getTime() - 1000 * 60 * 60 * hours) / 1000));
-          
+          graph.img.src = getGraphUrl(graph);
         }
         
         function getGraphData(graph){
           var bgUrl = graph.style.backgroundImage;
           var hours = graph.hours || (graph.hours = parseInt(graph.getAttribute('data'), 10));
+          var start = bgUrl.match(/graph_start=(\d*)/)[1] || Math.round((new Date().getTime() - 1000 * 60 * 60 * hours) / 1000);
+          var end = Math.round(parseInt(start, 10) + 60 * 60 * hours);
+          var url = getGraphUrl(graph, {start:start, end:end});
           return {
-            start: bgUrl.match(/graph_start=(\d*)/)[1] || Math.round((new Date().getTime() - 1000 * 60 * 60 * hours) / 1000),
-            end: bgUrl.match(/graph_end=(\d*)/) ? bgUrl.match(/graph_end=(\d*)/)[1] : Math.round((new Date().getTime()) / 1000),
-            url: bgUrl.match(/url\("(.*)"\)/) ? bgUrl.match(/url\("(.*)"\)/)[1] : bgUrl.match(/url\((.*)\)/)[1],
+            start: start,
+            end: end,
+            url: url,
             hours: hours
           };
+        }
+        
+        function getGraphUrl(graph, data){
+          data = data || {};
+          var bgUrl = graph.style.backgroundImage;
+          var url = bgUrl.match(/url\("(.*)"\)/) ? bgUrl.match(/url\("(.*)"\)/)[1] : bgUrl.match(/url\((.*)\)/)[1];
+          var hours = graph.hours || (graph.hours = parseInt(graph.getAttribute('data'), 10));
+          var start = data.start || Math.round((new Date().getTime() - 1000 * 60 * 60 * graph.hours) / 1000);
+          var end = data.end || Math.round(parseInt(start, 10) + 60 * 60 * graph.hours);
+          return url.replace(/&graph_start=\d*/, '').replace(/&graph_end=\d*/, '') + '&graph_start=' + start + '&graph_end=' + end;
         }
         
         function getGraphDataBefore(graph){
@@ -223,11 +232,11 @@
             if (event.ctrlKey) {
               changeStep(graph, -event.detail);
             } else {
-              var delta = (event.axis == event.HORIZONTAL_AXIS ? 1 : -1) * event.detail * 5
+              var delta = (event.axis == event.HORIZONTAL_AXIS ? 1 : -1) * event.detail * 5;
               if (graph.hours != 3) {
                 moveScroll(graph, delta);
               } else {
-                moveScrolls(delta)
+                moveScrolls(delta);
               }
             }
           }
@@ -275,14 +284,55 @@
           updateScroller(scroller, getGraphData(graph));
           updateScroller(scroller, getGraphDataBefore(scroller.scrollerList.querySelector('.scroller__graph')), 'before');
           updateScroller(scroller, getGraphDataBefore(scroller.scrollerList.querySelector('.scroller__graph')), 'before');
-          var after = scroller.scrollerList.querySelectorAll('.scroller__graph')
+          var after = scroller.scrollerList.querySelectorAll('.scroller__graph');
           updateScroller(scroller, getGraphDataAfter(after[after.length - 1]), 'after');
-          after = scroller.scrollerList.querySelectorAll('.scroller__graph')
+          after = scroller.scrollerList.querySelectorAll('.scroller__graph');
           updateScroller(scroller, getGraphDataAfter(after[after.length - 1]), 'after');
           scroller.scrollLeft = after[after.length - 1].offsetWidth * 2;
           scroller.timer = window.setTimeout(function(){
             clearScroller(graph);
           }, 1000 * 60 * 3); // 3 минуты
+        }
+        
+        function reloadScroller(graph, scale){
+          var scroller = graph.scroller;
+          var hours = graph.hours / scale;
+          scroller.scrollLeft = graph.defScroll;
+          var width = scroller.scrollerList.querySelectorAll('.scroller__graph')[0].offsetWidth * 5;
+          var totalbefore = graph.hours * 5 * 60 * 60;
+          var totalafter = hours * 5 * 60 * 60;
+          
+          var shiftbefore = totalbefore * graph.defScroll / width;
+          var shiftafter = totalafter * graph.defScroll / width;
+          
+          var visiblestart = parseInt(getGraphData(scroller.scrollerList.querySelectorAll('.scroller__graph')[0]).start, 10) + shiftbefore;
+          var start = visiblestart - shiftafter;
+          
+          console.log(new Date(start * 1000))
+          
+          graph = scroller.scrollerList.querySelectorAll('.scroller__graph')[0];
+          graph.hours = hours;
+          graph.start = start;
+          graph.style.backgroundImage = 'url("' + getGraphUrl(graph, {start:start})  + '")';
+          scroller.scrollerList.querySelectorAll('.scroller__graph')[1]
+            .style.backgroundImage = 'url("' + getGraphDataAfter(graph).url  + '")';
+            
+          graph = scroller.scrollerList.querySelectorAll('.scroller__graph')[1];
+          graph.hours = hours;
+          scroller.scrollerList.querySelectorAll('.scroller__graph')[2]
+            .style.backgroundImage = 'url("' + getGraphDataAfter(graph).url  + '")';
+          
+          graph = scroller.scrollerList.querySelectorAll('.scroller__graph')[2];
+          graph.hours = hours;
+          scroller.scrollerList.querySelectorAll('.scroller__graph')[3]
+            .style.backgroundImage = 'url("' + getGraphDataAfter(graph).url  + '")';
+            
+          graph = scroller.scrollerList.querySelectorAll('.scroller__graph')[3];
+          graph.hours = hours;
+          scroller.scrollerList.querySelectorAll('.scroller__graph')[4]
+            .style.backgroundImage = 'url("' + getGraphDataAfter(graph).url  + '")';
+            
+          //scroller.scrollLeft = scroller.scrollerList.querySelectorAll('.scroller__graph')[0].offsetWidth * 2;
         }
         
         function updateScroller(scroller, data, direction){
@@ -300,7 +350,7 @@
             default:
               scroller.scrollerList.appendChild(scroll);
           }
-        };
+        }
         
         function updateScrollerBefore(scroller, scroll){
           var firstChild = scroller.scrollerList.querySelector('.scroller__graph');
@@ -357,21 +407,20 @@
             graph.defScroll = scroller.scrollLeft;
           }
           scale = scale + delta / 10;
-          scale = scale > 0 ? scale : .1;
-          scale = scale < 5 ? scale : 5
+          scale = scale > 0 ? scale : 0.1;
+          scale = scale < 5 ? scale : 5;
           scroller.scrollerList.style.MozTransform = 'scale('+ scale +', 1)';
           scroller.scrollLeft = graph.defScroll * scale;
           graph.scaletimer = window.setTimeout(function(){
-            updateHours(graph, scale);
             scroller.scrollerList.style.MozTransform = 'scale(1, 1)';
-          }, 500)
+            updateHours(graph, scale);
+          }, 1000);
         }
         
         function updateHours(graph, scale){
+          reloadScroller(graph, scale);
           graph.hours = graph.hours / scale;
-          graph.style.opacity = .2;
           reload(graph);
-          clearScroller(graph);
         }
       })();
       
