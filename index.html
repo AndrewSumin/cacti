@@ -170,7 +170,7 @@
         function getGraphData(graph){
           var bgUrl = graph.style.backgroundImage;
           var hours = graph.hours || (graph.hours = parseInt(graph.getAttribute('data'), 10));
-          var start = bgUrl.match(/graph_start=(\d*)/)[1] || Math.round((new Date().getTime() - 1000 * 60 * 60 * hours) / 1000);
+          var start = parseInt(bgUrl.match(/graph_start=(\d*)/)[1], 10) || Math.round((new Date().getTime() - 1000 * 60 * 60 * hours) / 1000);
           var end = Math.round(parseInt(start, 10) + 60 * 60 * hours);
           var url = getGraphUrl(graph, {start:start, end:end});
           return {
@@ -300,13 +300,13 @@
           scroller.scrollLeft = graph.defScroll;
           var width = scroller.scrollerList.querySelectorAll('.scroller__graph')[0].offsetWidth * 5;
           var totalbefore = graph.hours * 5 * 60 * 60;
-          var totalafter = hours * 5 * 60 * 60;
+          var factor = totalbefore / width;
           
-          var shiftbefore = totalbefore * scroller.scrollLeft / width;
-          var shiftafter = totalafter * scroller.scrollLeft / width;
           
-          var visiblestart = parseInt(getGraphData(scroller.scrollerList.querySelectorAll('.scroller__graph')[0]).start, 10) + shiftbefore;
-          var start = visiblestart - shiftafter;
+          var S = getGraphData(scroller.scrollerList.querySelectorAll('.scroller__graph')[0]).start;
+          var l = scroller.scrollerList.querySelectorAll('.scroller__graph')[0].offsetWidth;
+          var center = S + (graph.defScroll + l / 2) * factor;
+          var start = center - parseInt(hours * 60 * 60 / 2, 10) - parseInt(hours * 60 *60 * 2, 10);
           
           
           graph = scroller.scrollerList.querySelectorAll('.scroller__graph')[0];
@@ -331,7 +331,7 @@
           scroller.scrollerList.querySelectorAll('.scroller__graph')[4]
             .style.backgroundImage = 'url("' + getGraphDataAfter(graph).url  + '")';
             
-          //scroller.scrollLeft = scroller.scrollerList.querySelectorAll('.scroller__graph')[0].offsetWidth * 2;
+          scroller.scrollLeft = scroller.scrollerList.querySelectorAll('.scroller__graph')[0].offsetWidth * 2;
         }
         
         function updateScroller(scroller, data, direction){
