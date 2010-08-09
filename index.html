@@ -120,29 +120,29 @@
     </div>
     <div class="row">
       <div class="place">
-        <h1 class="name"><span class="name__type">XSL</span> Поиск вакансий, за три часа</h1>
-        <div class="graph" data="3" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=22&rra_id=5&view_type=tree&graph_start=')">
+        <h1 class="name"><span class="name__type">Посещаеммость</span> Поиск вакансий, за три часа</h1>
+        <div class="graph" data="3" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=25&rra_id=5&view_type=tree&graph_start=')">
           &#160;
         </div>
       </div>
       <div class="place">
-        <h1 class="name"><span class="name__type">XSL</span> Вакансия, за три часа</h1>
-        <div class="graph" data="3" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=23&rra_id=5&view_type=tree&graph_start=')">
+        <h1 class="name"><span class="name__type">Посещаеммость</span> Вакансия, за три часа</h1>
+        <div class="graph" data="3" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=26&rra_id=5&view_type=tree&graph_start=')">
           &#160;
         </div>
       </div>
       <div class="place">
-        <h1 class="name"><span class="name__type">XSL</span> Работодатель, за три часа</h1>
-        <div class="graph" data="3" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=24&rra_id=5&view_type=tree&graph_start=')">
+        <h1 class="name"><span class="name__type">Посещаеммость</span> Работодатель, за три часа</h1>
+        <div class="graph" data="3" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=27&rra_id=5&view_type=tree&graph_start=')">
           &#160;
         </div>
       </div>
     </div>
-    <div class="legend">
+    <!--div class="legend">
       <span class="legend__item" style="color:#FFBB99">99-я квантиль</span>
       <span class="legend__item" style="color:#FF742E">95-я квантиль</span>
       <span class="legend__item" style="color:#FF5600">90-я квантиль</span>
-    </div>
+    </div-->
     <form id="login" style="display:none;" action="http://cacti.hh.ru/graph.php" method="post" target="login">
       <input type="hidden" name="action" value="login"/>
       <input type="hidden" name="login_username" value="guest"/>
@@ -229,15 +229,16 @@
         function doScroll(graph){
           function wheel(event){
             event.preventDefault();
-            if (event.ctrlKey) {
-              changeStep(graph, -event.detail);
+            if (event.ctrlKey || event.metaKey) {
+              changeSteps(-event.detail);
+              //changeStep(graph, -event.detail);
             } else {
               var delta = (event.axis == event.HORIZONTAL_AXIS ? 1 : -1) * event.detail * 5;
-              if (graph.hours != 3) {
-                moveScroll(graph, delta);
-              } else {
+              //if (graph.hours != 3) {
+              //  moveScroll(graph, delta);
+              //} else {
                 moveScrolls(delta);
-              }
+              //}
             }
           }
           
