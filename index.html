@@ -15,10 +15,16 @@
       .graph{
         width:450px;
         height:265px;
+        margin-right:50px;
         position:relative;
         background-position: -16px -31px;
         background-repeat:no-repeat;
       }
+        .absolute .graph{
+          width:420px;
+          margin-left:34px;
+          background-position: -50px -31px;
+        }
       .row{
         overflow:hidden;
       }
@@ -54,6 +60,7 @@
         width:402px;
         height:260px;
         background:white;
+        z-index:1;
       }
         .scroller__list{
           white-space:nowrap;
@@ -64,25 +71,42 @@
           background-position:-57px -39px;
           display:inline-block;
         }
+        .absolute .scroller{
+          left:7px;
+        }
+      .absolute{
+        margin-top:-313px;
+        position:absolute;
+      }
+        .absolute .scroller{
+          background:none;
+        }
+      .graph__scale{
+        position:absolute;
+        right:-7px;
+        height:265px;
+        width:15px;
+        background-position:-36px -31px;
+      }
     </style>
   </head>
   <body>
     <div class="row">
       <div class="place">
         <h1 class="name"><span class="name__type">Frontik</span> Поиск вакансий, за три часа</h1>
-        <div class="graph" data="3" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=16&rra_id=5&view_type=tree&graph_start=')">
+        <div class="graph" data="3" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=16&rra_id=5&view_type=tree&graph_start=&graph_end=')">
           <div class="graph__line">&#160;</div>
         </div>
       </div>
       <div class="place">
         <h1 class="name"><span class="name__type">Frontik</span> Вакансия, за три часа</h1>
-        <div class="graph" data="3" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=17&rra_id=5&view_type=tree&graph_start=')">
+        <div class="graph" data="3" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=17&rra_id=5&view_type=tree&graph_start=&graph_end=')">
           <div class="graph__line">&#160;</div>
         </div>
       </div>
       <div class="place">
         <h1 class="name"><span class="name__type">Frontik</span> Работодатель, за три часа</h1>
-        <div class="graph" data="3" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=18&rra_id=5&view_type=tree&graph_start=')">
+        <div class="graph" data="3" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=18&rra_id=5&view_type=tree&graph_start=&graph_end=')">
           <div class="graph__line">&#160;</div>
         </div>
       </div>
@@ -96,20 +120,40 @@
     <div class="row">
       <div class="place">
         <h1 class="name"><span class="name__type">Frontik</span> Поиск вакансий, за три часа</h1>
-        <div class="graph" data="3" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=19&rra_id=5&view_type=tree&graph_start=')">
+        <div class="graph" data="3" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=19&rra_id=5&view_type=tree&graph_start=&graph_end=')">
           <div class="graph__line">&#160;</div>
         </div>
       </div>
       <div class="place">
         <h1 class="name"><span class="name__type">Frontik</span> Вакансия, за три часа</h1>
-        <div class="graph" data="3" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=20&rra_id=5&view_type=tree&graph_start=')">
+        <div class="graph" data="3" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=20&rra_id=5&view_type=tree&graph_start=&graph_end=')">
           <div class="graph__line">&#160;</div>
         </div>
       </div>
       <div class="place">
         <h1 class="name"><span class="name__type">Frontik</span> Работодатель, за три часа</h1>
-        <div class="graph" data="3" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=21&rra_id=5&view_type=tree&graph_start=')">
+        <div class="graph" data="3" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=21&rra_id=5&view_type=tree&graph_start=&graph_end=')">
           <div class="graph__line">&#160;</div>
+        </div>
+      </div>
+    </div>
+    <div class="row absolute">
+      <div class="place">
+        <h1 class="name"><span class="name__type">&#160;</span></h1>
+        <div class="graph" data="3" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=25&rra_id=5&view_type=tree&graph_start=&graph_end=')">
+          <div class="graph__scale" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=25&rra_id=5&view_type=tree&graph_start=&graph_end=')">&#160;</div>
+        </div>
+      </div>
+      <div class="place">
+        <h1 class="name"><span class="name__type">&#160;</span></h1>
+        <div class="graph" data="3" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=26&rra_id=5&view_type=tree&graph_start=&graph_end=')">
+          <div class="graph__scale" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=26&rra_id=5&view_type=tree&graph_start=&graph_end=')">&#160;</div>
+        </div>
+      </div>
+      <div class="place">
+        <h1 class="name"><span class="name__type">&#160;</span></h1>
+        <div class="graph" data="3" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=27&rra_id=5&view_type=tree&graph_start=&graph_end=')">
+          <div class="graph__scale" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=27&rra_id=5&view_type=tree&graph_start=&graph_end=')">&#160;</div>
         </div>
       </div>
     </div>
@@ -117,32 +161,33 @@
       <span class="legend__item" style="color:#DA4725">больше 2 секунд</span>
       <span class="legend__item" style="color:#FFF200">больше 0.5 секунды</span>
       <span class="legend__item" style="color:#00BD27">все хорошо</span>
+      <span class="legend__item" style="color:#000000">посетителей в секунду</span>
     </div>
     <div class="row">
       <div class="place">
-        <h1 class="name"><span class="name__type">Посещаеммость</span> Поиск вакансий, за три часа</h1>
-        <div class="graph" data="3" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=25&rra_id=5&view_type=tree&graph_start=')">
-          &#160;
+        <h1 class="name"><span class="name__type">Frontik</span> Поиск вакансий, за три часа</h1>
+        <div class="graph" data="3" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=22&rra_id=5&view_type=tree&graph_start=&graph_end=')">
+          <div class="graph__line">&#160;</div>
         </div>
       </div>
       <div class="place">
-        <h1 class="name"><span class="name__type">Посещаеммость</span> Вакансия, за три часа</h1>
-        <div class="graph" data="3" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=26&rra_id=5&view_type=tree&graph_start=')">
-          &#160;
+        <h1 class="name"><span class="name__type">Frontik</span> Вакансия, за три часа</h1>
+        <div class="graph" data="3" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=23&rra_id=5&view_type=tree&graph_start=&graph_end=')">
+          <div class="graph__line">&#160;</div>
         </div>
       </div>
       <div class="place">
-        <h1 class="name"><span class="name__type">Посещаеммость</span> Работодатель, за три часа</h1>
-        <div class="graph" data="3" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=27&rra_id=5&view_type=tree&graph_start=')">
-          &#160;
+        <h1 class="name"><span class="name__type">Frontik</span> Работодатель, за три часа</h1>
+        <div class="graph" data="3" style="background-image:url('http://cacti.hh.ru/graph_image.php?local_graph_id=24&rra_id=5&view_type=tree&graph_start=&graph_end=')">
+          <div class="graph__line">&#160;</div>
         </div>
       </div>
     </div>
-    <!--div class="legend">
+    <div class="legend">
       <span class="legend__item" style="color:#FFBB99">99-я квантиль</span>
       <span class="legend__item" style="color:#FF742E">95-я квантиль</span>
       <span class="legend__item" style="color:#FF5600">90-я квантиль</span>
-    </div-->
+    </div>
     <form id="login" style="display:none;" action="http://cacti.hh.ru/graph.php" method="post" target="login">
       <input type="hidden" name="action" value="login"/>
       <input type="hidden" name="login_username" value="guest"/>
@@ -183,19 +228,24 @@
         
         function getGraphUrl(graph, data){
           data = data || {};
-          var bgUrl = graph.style.backgroundImage;
-          var url = bgUrl.match(/url\("(.*)"\)/) ? bgUrl.match(/url\("(.*)"\)/)[1] : bgUrl.match(/url\((.*)\)/)[1];
-          var hours = graph.hours || (graph.hours = parseInt(graph.getAttribute('data'), 10));
-          var start = data.start || Math.round((new Date().getTime() - 1000 * 60 * 60 * graph.hours) / 1000);
-          var end = data.end || Math.round(parseInt(start, 10) + 60 * 60 * graph.hours);
-          return url.replace(/&graph_start=\d*/, '').replace(/&graph_end=\d*/, '') + '&graph_start=' + start + '&graph_end=' + end;
+          
+          var bgUrl = graph.style.backgroundImage.split(',');
+          var url = [];
+          for (var i = 0; i < bgUrl.length; i++){
+            url[i] = bgUrl[i].match(/url\("([^\)]*)"\)/) ? bgUrl[i].match(/url\("([^\)]*)"\)/)[1] : bgUrl[i].match(/url\(([^\)]*)\)/)[1];
+            var hours = graph.hours || (graph.hours = parseInt(graph.getAttribute('data'), 10));
+            var start = data.start || Math.round((new Date().getTime() - 1000 * 60 * 60 * graph.hours) / 1000);
+            var end = data.end || Math.round(parseInt(start, 10) + 60 * 60 * graph.hours);
+            url[i] = url[i].replace(/&graph_start=\d*/g, '&graph_start=' + start).replace(/&graph_end=\d*/g, '&graph_end=' + end);
+          }
+          return url[0];
         }
         
         function getGraphDataBefore(graph){
           var data = getGraphData(graph);
           data.end = parseInt(data.start, 10) - 1;
           data.start = Math.round((new Date(data.end * 1000).getTime() - 1000 * 60 * 60 * data.hours) / 1000);
-          data.url = data.url.replace(/&graph_start=\d*/, '').replace(/&graph_end=\d*/, '') + '&graph_start=' + data.start + '&graph_end=' + data.end;
+          data.url = data.url.replace(/&graph_start=\d*/g, '&graph_start=' + data.start).replace(/&graph_end=\d*/g, '&graph_end=' + data.end);
           return data;
         }
         
@@ -203,7 +253,7 @@
           var data = getGraphData(graph);
           data.start = parseInt(data.end, 10) + 1;
           data.end = Math.round((new Date(data.start * 1000).getTime() + 1000 * 60 * 60 * data.hours) / 1000);
-          data.url = data.url.replace(/&graph_start=\d*/, '').replace(/&graph_end=\d*/, '') + '&graph_start=' + data.start + '&graph_end=' + data.end;
+          data.url = data.url.replace(/&graph_start=\d*/g, '&graph_start=' + data.start).replace(/&graph_end=\d*/g, '&graph_end=' + data.end);
           return data;
         }
        
